@@ -9,13 +9,23 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import Characters from "./pages/Characters";
-import CharDetails from "./pages/CharDetails";
-import Planets from "./pages/Planets";
-import PlanetsDetails from "./pages/PlanetsDetails";
-import Vehicles from "./pages/Vehicles";
-import VehiclesDetails from "./pages/VehiclesDetails";
-import Testing from "./pages/testing";
+import Characters from "./pages/External-API/Characters";
+import CharDetails from "./pages/External-API/CharDetails";
+import Planets from "./pages/External-API/Planets";
+import PlanetsDetails from "./pages/External-API/PlanetsDetails";
+import Vehicles from "./pages/External-API/Vehicles";
+import VehiclesDetails from "./pages/External-API/VehiclesDetails";
+import Testing from "./pages/External-API/testing";
+import HomeExternal from "./pages/External-API/HomeExternal";
+import HomeInternal from "./pages/Internal/HomeInternal";
+import CharactersInt from "./pages/Internal/CharactersInt";
+import CharDetailsInt from "./pages/Internal/CharDetailsInt";
+import PlanetsInt from "./pages/Internal/PlanetsInt";
+import PlanetsDetailsInt from "./pages/Internal/PlanetsDetailsInt";
+import VehiclesInt from "./pages/Internal/VehiclesInt";
+import VehiclesDetailsInt from "./pages/Internal/VehiclesDetailsInt";
+
+
 
 //create your first component
 const Layout = () => {
@@ -27,18 +37,28 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                    {/* <Navbar /> */}
                     <Routes>
+
+                        
                         <Route element={<Home />} path="/" />
+                        <Route element={<HomeExternal />} path="/home-external" />
+                        <Route element={<HomeInternal />} path="/home-internal" />
 
                         <Route element={<Characters />} path="/characters" />
+                        <Route element={<CharactersInt />} path="/charactersint" />
                         <Route element={<CharDetails />} path="/characters/:id" />
+                        <Route element={<CharDetailsInt />} path="/charactersint/:id" />
 
                         <Route element={<Planets />} path="/planets" />
+                        <Route element={<PlanetsInt />} path="/planetsint" />
                         <Route element={<PlanetsDetails />} path="/planets/:id" />
+                        <Route element={<PlanetsDetailsInt />} path="/planetsint/:id" />
 
                         <Route element={<Vehicles />} path="/vehicles" />
+                        <Route element={<VehiclesInt />} path="/vehiclesint" />
                         <Route element={<VehiclesDetails />} path="/vehicles/:id" />
+                        <Route element={<VehiclesDetailsInt />} path="/vehiclesint/:id" />
 
                         <Route element={<Testing />} path="/testing" />
                         

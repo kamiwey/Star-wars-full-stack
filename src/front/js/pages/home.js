@@ -2,9 +2,18 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
+import { Link } from "react-router-dom";
 
 export const Home = () => (
 	<div className="text-center mt-5">
+
+    <button>
+      <Link to="/home-internal">int</Link>
+    </button>
+    <button>
+      <Link to="/home-external">API</Link>
+    </button>
+
 		<section className="intro">
   A long time ago, in a galaxy far,<br/> far away....
 </section>
