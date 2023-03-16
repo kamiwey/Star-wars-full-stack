@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import NavbarExt from '../../component/NavbarExt';
 import { Context } from '../../store/appContext';
 
 const PlanetsDetails = () => {
@@ -12,6 +13,8 @@ const PlanetsDetails = () => {
   }, []);
 
   return (
+	<div>
+		<NavbarExt />
     <div className="jumbotron">
 
 			<div className="card mb-3" style={{ maxWidth: "60%", margin: "auto", background: "#282727" }}>
@@ -39,6 +42,7 @@ const PlanetsDetails = () => {
 				</div>
 			</div>
 			
+		</div>
 		</div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Context } from '../../store/appContext';
 import { Link } from 'react-router-dom';
+import NavbarExt from '../../component/NavbarExt';
 
 const Vehicles = () => {
   const { store, actions } = useContext(Context);
@@ -9,6 +10,8 @@ const Vehicles = () => {
   let buttonVar = "";
 
   return (
+    <div>
+      <NavbarExt />
     <div className="container">
       <h1 className="text-light">Vehicles</h1>
       <div className="row row-cols-5 g-3 justify-content-center">
@@ -76,6 +79,7 @@ const Vehicles = () => {
         </div>
 
       </div>
+    </div>
     </div>
   )
 }

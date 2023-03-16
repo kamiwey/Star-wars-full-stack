@@ -1,8 +1,13 @@
 import React from 'react'
+import NavbarInt from '../../component/NavbarInt'
 
 const CharactersInt = () => {
   return (
-    <div>CharactersInt</div>
+    
+    <div>
+        <NavbarInt />
+        <h1>Characters Internal</h1>
+    </div>
   )
 }
 

@@ -3,8 +3,11 @@ import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
+import { Navbar } from "../component/navbar";
 
 export const Home = () => (
+  <div>
+    <Navbar />
 	<div className="text-center mt-5">
 
     <button>
@@ -131,6 +134,7 @@ The credits for this crawl text is for Christopher Kade and his tutorial at http
 
 
 	</div>
+  </div>
 );
 
 

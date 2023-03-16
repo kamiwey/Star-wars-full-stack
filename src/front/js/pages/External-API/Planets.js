@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../store/appContext";
 import { Link } from "react-router-dom";
+import NavbarExt from "../../component/NavbarExt";
 
 const Planets = () => {
   const { store, actions } = useContext(Context);
@@ -8,6 +9,8 @@ const Planets = () => {
   let favIcon = "";
 
   return (
+    <div>
+      <NavbarExt />
     <div className="container">
       <h1 className="text-light">Planets</h1>
       <div className="row row-cols-5 g-3 justify-content-center">
@@ -75,6 +78,7 @@ const Planets = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
 import Characters from "./pages/External-API/Characters";
 import CharDetails from "./pages/External-API/CharDetails";
 import Planets from "./pages/External-API/Planets";
@@ -17,6 +18,7 @@ import Vehicles from "./pages/External-API/Vehicles";
 import VehiclesDetails from "./pages/External-API/VehiclesDetails";
 import Testing from "./pages/External-API/testing";
 import HomeExternal from "./pages/External-API/HomeExternal";
+
 import HomeInternal from "./pages/Internal/HomeInternal";
 import CharactersInt from "./pages/Internal/CharactersInt";
 import CharDetailsInt from "./pages/Internal/CharDetailsInt";
