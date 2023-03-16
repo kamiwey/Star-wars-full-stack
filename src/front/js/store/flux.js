@@ -23,6 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			singleVehicle:[],
 			singlePlanet:[],
 			favorites:[],
+
+			character: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -56,6 +58,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
+
+//-----------------------------------------------------------------------------------------------------------------------------
+      //											EXT API FETCHS
+      //-----------------------------------------------------------------------------------------------------------------------------
+
 
 			getPeople: (varPag) => {
 				const store = getStore();
@@ -284,7 +291,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				setStore({favorites : testeVar});
 
-			}
+			},
+
+//-----------------------------------------------------------------------------------------------------------------------------
+      //											 INTERNAL FETCH
+      //-----------------------------------------------------------------------------------------------------------------------------
+
+			
+      getCharacters: async () => {
+        try {
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/all_characters"
+            
+          ); // search
+          const data = await response.json();
+          // set store with the bringed data
+          setStore({
+            character: data,
+          }); //promise
+        } catch (err) {
+          // standar error log
+          console.log(err);
+        }
+        // details fetch
+      },
+
+
+
 		}
 	};
 };
