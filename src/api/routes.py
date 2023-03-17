@@ -33,7 +33,7 @@ def all_users():
     return response
 
 
-@api.route('/all_characters', methods=['GET'])
+@api.route('/home-internal/characters', methods=['GET'])
 def all_characters():
 
     char = Character.query.all()
@@ -42,7 +42,7 @@ def all_characters():
     
     return response
 
-@api.route('/all_planets', methods=['GET'])
+@api.route('/home-internal/planets', methods=['GET'])
 def all_planets():
 
     plan = Planet.query.all()
@@ -51,7 +51,7 @@ def all_planets():
     
     return response
 
-@api.route('/all_vehicles', methods=['GET'])
+@api.route('/home-internal/vehicles', methods=['GET'])
 def all_vehicles():
 
     veh = Vehicle.query.all()
@@ -60,25 +60,25 @@ def all_vehicles():
     
     return response
 
-@api.route('/character/<int:position>', methods=['GET'])
+@api.route('/home-internal/characters/<int:position>', methods=['GET'])
 def specific_char(position):
 
     char = Character.query.filter_by(id=position).first()
     return jsonify(char.serialize())
 
-@api.route('/planet/<int:position>', methods=['GET'])
+@api.route('/home-internal/planets/<int:position>', methods=['GET'])
 def specific_planet(position):
 
     plan = Planet.query.filter_by(id=position).first()
     return jsonify(plan.serialize())
 
-@api.route('/vehicle/<int:position>', methods=['GET'])
+@api.route('/home-internal/vehicles/<int:position>', methods=['GET'])
 def specific_veh(position):
 
     veh = Vehicle.query.filter_by(id=position).first()
     return jsonify(veh.serialize())
 
-@api.route('/add_fav_char', methods=['POST'])
+@api.route('/home-internal/add_fav_char', methods=['POST'])
 def add_fav_char():
 
     request_body = request.json
@@ -91,7 +91,7 @@ def add_fav_char():
     
     return response
 
-@api.route('/add_fav_planet', methods=['POST'])
+@api.route('/home-internal/add_fav_planet', methods=['POST'])
 def add_fav_planet():
 
     request_body = request.json
@@ -104,7 +104,7 @@ def add_fav_planet():
     
     return response
 
-@api.route('/add_fav_veh', methods=['POST'])
+@api.route('/home-internal/add_fav_veh', methods=['POST'])
 def add_fav_veh():
 
     request_body = request.json
@@ -117,7 +117,7 @@ def add_fav_veh():
     
     return response
 
-@api.route('/get_all_fav', methods=['GET'])
+@api.route('/home-internal/get_all_fav', methods=['GET'])
 def get_all_fav():
 
     user = request.json.get("user_id", None)
@@ -138,7 +138,7 @@ def get_all_fav():
     print(find_planet)
     return find_veh + find_char + find_planet
 
-@api.route('/favorite/planet/<int:planet_id>', methods=['DELETE'])
+@api.route('/home-internal/favorite/planet-delete/<int:planet_id>', methods=['DELETE'])
 #@jwt_required()
 def delete_planet(planet_id):
 
@@ -150,7 +150,7 @@ def delete_planet(planet_id):
     
     return jsonify({"planet": planet.serialize(),"message": "this planet was deleted"}), 200
 
-@api.route('/favorite/char/<int:char_id>', methods=['DELETE'])
+@api.route('/home-internal/favorite/char-delete/<int:char_id>', methods=['DELETE'])
 #@jwt_required()
 def delete_char(char_id):
 
@@ -162,7 +162,7 @@ def delete_char(char_id):
     
     return jsonify({"character": char.serialize(),"message": "this character was deleted"}), 200
 
-@api.route('/favorite/veh/<int:veh_id>', methods=['DELETE'])
+@api.route('/home-internal/favorite/veh-delete/<int:veh_id>', methods=['DELETE'])
 #@jwt_required()
 def delete_veh(veh_id):
 

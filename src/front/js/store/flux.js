@@ -311,7 +311,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getCharacters: async () => {
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/all_characters"
+            process.env.BACKEND_URL + "/api/home-internal/characters"
           );
 
           const data = await response.json();
@@ -331,7 +331,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let store = getStore();
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/all_character/" + id
+            process.env.BACKEND_URL + "/api/home-internal/characters/" + id
           );
 
           const data = await response.json();
@@ -355,7 +355,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getPlanetsInt: async () => {
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/all_planets"
+            process.env.BACKEND_URL + "/api/home-internal/planets"
           );
           const data = await response.json();
 
@@ -375,7 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let store = getStore();
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/all_planets/" + id
+            process.env.BACKEND_URL + "/api/home-internal/planets/" + id
           );
 
           const data = await response.json();
@@ -399,7 +399,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	  getVehiclesInt: async () => {
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/all_vehicles"
+            process.env.BACKEND_URL + "/api/home-internal/vehicles"
           );
           const data = await response.json();
 
@@ -419,7 +419,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let store = getStore();
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/all_vehicles/" + id
+            process.env.BACKEND_URL + "/api/home-internal/vehicles/" + id
           );
 
           const data = await response.json();
