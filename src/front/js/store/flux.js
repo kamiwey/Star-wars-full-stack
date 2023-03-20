@@ -354,7 +354,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 //											PUT UPDATE USERS
 //----------------------------------------------------------------------------------------------------
 
-      updateUser: async (password, name, lastname, country) => {
+      updateUser: async (password, name, lastname, phone) => {
         // bring user data by id
         let store = getStore();
         let user_id = store.userId;
@@ -367,7 +367,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               password: password,
               name: name,
               lastname: lastname,
-              country: country,
+              phone: phone,
             }
           );
           // Sweet alert
