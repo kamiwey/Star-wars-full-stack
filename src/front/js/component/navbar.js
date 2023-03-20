@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
+
 	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
+		<div className="sticky-top">
+        <nav className="navBar1 navbar navbar-expand-lg  ">
+          <div className="container-fluid ">
+            <div className="col-1"></div>
+            <Link className="col-10 text-center" to="/">
+              <img
+                className="logoNavBar"
+                src="https://1000marcas.net/wp-content/uploads/2019/12/logo-StarWars.png"
+              />
+            </Link>
+          </div>
+        </nav>
+
+       
+      </div>
 	);
 };

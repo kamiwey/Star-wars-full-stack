@@ -1,3 +1,244 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+.navBar1 {
+    background-color: transparent;
+}
+
+.logoNavBar {
+    width: 16rem;
+    height: 8rem;
+    text-align: center;
+}
+
+.dropContainer {
+    margin: 0px;
+    background-color: #feda4a;
+}
+
+.favBtn {
+    border-color:#feda4a;
+  
+}
+
+.delFavBtn {
+    color:#000;
+    font-size: 25px;
+    margin: 0;
+}
+
+.delFavItemBtn { 
+    font-size: 20px;
+    font-weight:bolder;
+}
+
+.navBar2 {
+    background: transparent;
+    list-style-type: none;
+}
+
+.linkToView {
+    color: white;
+    text-decoration: none;
+}
+.jumbotron {
+    margin-top: 100px;
+}
+
+.card {
+    background-color: transparent;
+    border: 1px solid rgb(124, 29, 29);
+}
+
+.textCard{
+    color: rgb(229, 229, 238);
+    font-size: 30px;
+}
+
+.singleViewDetails {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    
+}
+.spacer {
+    border-right: 3px solid rgb(124, 29, 29);
+    border-top: 3px solid rgb(124, 29, 29);
+    color: rgb(229, 229, 238);
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+.onlyUp {
+    border-top: 3px solid rgb(124, 29, 29);
+    color: rgb(229, 229, 238);
+    padding-top: 15px;
+}
+
+/* p {
+
+    color: rgb(229, 229, 238);
+} */
+
+.footer {
+    width: 100%;
+    padding-bottom: 0px;
+    position:fixed;
+    bottom:0;
+    letter-spacing: 0.2px;
+    background-color: transparent;       
+}
+
+.social-links {
+    text-align: center;
+    margin-top: 10px;
+    justify-content: center;
+    font-size: 25px;
+    border-spacing: 100px;
+    display: inline-flex;
+}
+
+.facebook {
+    color: rgb(236, 236, 245);
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.instagram {
+    color: rgb(236, 236, 245);
+    margin-right: 10px;
+}
+
+.twitter {
+    color: rgb(236, 236, 245);
+    margin-right: 10px;
+}
+
+.youtube {
+    color: rgb(236, 236, 245);
+    ;
+}
+
+
+
+body {
+    margin: 0;
+    background-color: black;
+  }
+  
+  .star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background-color: white;
+  }
+  
+  /* Set the animation, color, size and hide the text */
+  .intro {
+      position: absolute;
+      top: 30%;     
+      left: 35%;
+      z-index: 1;
+      animation: intro 6s ease-out 1s;
+      color: rgb(75, 213, 238);
+      font-weight: 400;
+      font-size: 300%;
+      opacity: 0;
+  }
+  
+  @keyframes intro {
+      0% {
+          opacity: 0;
+      }
+      20% {
+          opacity: 1;
+      }
+      90% {
+          opacity: 1;
+      }
+      100% {
+          opacity: 0;
+      }
+  }
+  
+  /* Set the animation & hide the logo */
+  .logo {    
+      position: absolute;
+      top: 30%;
+      left: 45%;
+      z-index: 1;
+      margin: auto;
+      animation: logo 9s ease-out 9s;
+      opacity: 0;
+  }
+  
+  .logo svg {
+      width: inherit;
+  }
+  
+  /* Scale the logo down and maintain it centered */
+  @keyframes logo {
+      0% {
+          width: 18em;        
+          transform: scale(7);
+          opacity: 1;
+      }
+      50% {
+          opacity: 1;
+          width: 18em;      
+      }
+      100% {
+          opacity: 0;
+          transform: scale(0.1);
+          width: 18em;
+      }
+  }
+  
+  p {
+    color: #FFFF82;
+  }
+  
+  /* Set the font, lean the board, position it */
+  #board {
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    transform: perspective(600px) rotateX(25deg);
+    transform-origin: 50% 100%;
+    text-align: justify;
+    position: absolute;
+    margin-left: -9em;
+    font-weight: bold;
+    overflow: hidden;
+    font-size: 350%;
+    height: 50em;
+    width: 25em;
+    bottom: 0;
+    left: 50%;
+  }
+  
+  #board:after {    
+    position: absolute;
+    content: ' ';
+    bottom: 60%;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  
+  /* Set the scrolling animation and position it */
+  #content {
+    animation: scroll 100s linear 16s;
+    position: absolute;
+    top: 100%;
+  }
+  
+  #title, #subtitle {
+    text-align: center;
+  }
+  
+  @keyframes scroll {
+      0% {
+          top: 100%;
+      }
+      100% {
+          top: -170%;
+      }
+  }
