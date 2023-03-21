@@ -97,7 +97,7 @@ const Login = () => {
                     </div>
                     <p className="small mb-3 pb-lg-2">
                       <br />
-                      <Link className="text-black-50" to={"/changePassword"}>
+                      <Link className="text-white-50" to={"/changePassword"}>
                         Forgot password?
                       </Link>
                     </p>
@@ -116,7 +116,7 @@ const Login = () => {
                     <div>
                       <p className="mb-0" style={{ color: "#bdb284" }}>
                         Don't have an account?{" "}
-                        <Link to="/signup" className="text-black-50 fw-bold">
+                        <Link to="/signup" className="text-white-50 fw-bold">
                           Sign Up
                         </Link>
                       </p>

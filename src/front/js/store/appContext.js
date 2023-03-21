@@ -34,6 +34,8 @@ const injectContext = PassedComponent => {
 			state.actions.getVehicles();
 			state.actions.getPlanets();
 
+			state.actions.validToken();
+
 
 		}, []);
 

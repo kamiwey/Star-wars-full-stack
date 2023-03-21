@@ -26,6 +26,8 @@ import VehiclesInt from "./pages/Internal/VehiclesInt";
 import VehiclesDetails from "./pages/External-API/VehiclesDetails";
 import VehiclesDetailsInt from "./pages/Internal/VehiclesDetailsInt";
 import Testing from "./pages/External-API/Testing";
+import Profile from "./pages/Profile/Profile";
+import Admin from "./pages/Admin/Admin";
 
 //create your first component
 const Layout = () => {
@@ -60,7 +62,10 @@ const Layout = () => {
 
                         <Route element={<SignUp />} path="/signup" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<Profile />} path="/profile" />
                         <Route element={<Testing />} path="/testing" />
+
+                        <Route element={<Admin />} path="/Admin" />
 
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />

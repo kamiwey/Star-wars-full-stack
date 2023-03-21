@@ -84,11 +84,38 @@ const NavbarInt = () => {
                 Vehicles
               </Link>
             </li>
-            <li className=" nav-item ">
+            <li className="me-5 nav-item ">
               <Link to="/testing" className="linkToView" >
                 TEST PAGE
               </Link>
             </li>
+
+            {store.auth ? (
+              <li className="me-5 nav-item  ">
+                <Link to="/Profile" className="linkToView">
+                  PROFILE
+                </Link>
+              </li>
+            ) : null}{" "}
+
+            {store.auth ? (
+              <div>
+                {store.admin ? (
+                  <div>
+                    <li className="nav-item">
+                      <Link to="/Admin" className="linkToView">
+                        ADMIN
+                      </Link>
+                    </li>
+                  </div>
+                ) : null}{" "}
+              </div>
+            ) : null}{" "}
+
+            {store.premium ? (              
+              <i className="OthServIconPremium bt-5 fa fa-award"></i>
+            ) : null}{" "}
+
           </div>
         </nav>
       </div>
