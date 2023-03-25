@@ -1,25 +1,24 @@
 import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Context } from '../../store/appContext'
-import NavbarInt from '../../component/NavbarInt';
 
-const PlanetsDetailsInt = () => {
-  const { store, actions } = useContext(Context);
+const CharDetails = () => {
+  const {store, actions } = useContext(Context);
   const params = useParams();
 
   useEffect(() => {
-    actions.getPlanetsDetail(params.id);
+    actions.getCharactersDetail(params.id);
   },[]);
 
   return (
     <div>
-		<NavbarInt />
+	
     <div className="jumbotron ">
 
 			<div className="card" style={{ maxWidth: "60%", margin: "auto", background: "#282727"}}>
 				<div className="row g-0">
 					<div className="col-md-3">
-						<img src={"https://starwars-visualguide.com/assets/img/planets/"+ params.id + ".jpg"} className="img-fluid rounded-start" alt="..." />
+						<img src={"https://starwars-visualguide.com/assets/img/characters/"+ params.id + ".jpg"} className="img-fluid rounded-start" alt="..." />
 					</div>
 					<div className="col-md-8">
 						<div className="card-body">
@@ -33,12 +32,12 @@ const PlanetsDetailsInt = () => {
 
 				<div className="singleViewDetails container text-center">
 					<div className="row row-cols-6">
-						<div className="spacer col text-light"><h5>Name</h5><h5>{store.planetDetail.name}</h5></div>
-						<div className="spacer col text-light"><h5>Population</h5><h5>{store.planetDetail.population}</h5></div>
-						<div className="spacer col text-light"><h5>Rotation Period</h5><h5>{store.planetDetail.rotation_period}</h5></div>
-						<div className="spacer col text-light"><h5>Surface Water</h5><h5>{store.planetDetail.surface_water}</h5></div>
-						<div className="spacer col text-light"><h5>Gravity</h5><h5>{store.planetDetail.gravity}</h5></div>
-						<div className="onlyUp col text-light"><h5>Climate</h5><h5>{store.planetDetail.climate}</h5></div>
+						<div className="spacer col text-light"><h5>Name</h5><h5>{store.characterDetail.name}</h5></div>
+						<div className="spacer col text-light"><h5>Birth Year</h5><h5>{store.characterDetail.birth_year}</h5></div>
+						<div className="spacer col text-light"><h5>Gender</h5><h5>{store.characterDetail.gender}</h5></div>
+						<div className="spacer col text-light"><h5>Height</h5><h5>{store.characterDetail.height}</h5></div>
+						<div className="spacer col text-light"><h5>Skin Color</h5><h5>{store.characterDetail.skin_color}</h5></div>
+						<div className="onlyUp col text-light"><h5>Eye color</h5><h5>{store.characterDetail.eye_color}</h5></div>
 					</div>
 				</div>
 			</div>
@@ -48,4 +47,4 @@ const PlanetsDetailsInt = () => {
   )
 }
 
-export default PlanetsDetailsInt;
+export default CharDetails;

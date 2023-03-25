@@ -19,16 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-      people: [],
-      next: "",
-      previous: "",
-      vehicles: [],
-      planets: [],
-      person: [],
-      singleVehicle: [],
-      singlePlanet: [],
-      favorites: [],
-
+      
       admin: false,
       premium: false,
       userId: null,
@@ -45,7 +36,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	    vehicle: [],
 	    vehicleDetail: {},
 	    vehicleId: null,
-      
+
+      favorites: [],
+      user_id:null,
 		},
 		actions: {
 
@@ -85,239 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-//--------------------------------------------------------------------------------------------
-//											EXT API FETCHS
-//-------------------------------------------------------------------------------------------
 
-      getPeople: (varPag) => {
-        const store = getStore();
-        let fetchVar = "";
-
-        console.log("varpag", varPag);
-
-        if (varPag == null) {
-          fetchVar = "https://www.swapi.tech/api/people/";
-        } else {
-          fetchVar = varPag;
-        }
-
-        fetch(fetchVar, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            let dataGathered = data.results.map((item, index) => {
-              return { ...item, index: index, type: "people", favorite: false };
-            });
-            console.log("is me again ", data);
-            setStore({ people: dataGathered });
-            setStore({ next: data.next });
-            setStore({ previous: data.previous });
-          });
-      },
-
-      getPerson: (uid) => {
-        const store = getStore();
-        fetch("https://www.swapi.tech/api/people/" + uid, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            let dataGathered = data.result.properties;
-
-            setStore({ person: dataGathered });
-          });
-      },
-
-      getVehicles: (varPag) => {
-        const store = getStore();
-        let fetchVar = "";
-
-        console.log("varpag", varPag);
-
-        if (varPag == null) {
-          fetchVar = "https://www.swapi.tech/api/vehicles/";
-        } else {
-          fetchVar = varPag;
-        }
-
-        fetch(fetchVar, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            let dataGathered = data.results.map((item, index) => {
-              return {
-                ...item,
-                index: index,
-                type: "vehicles",
-                favorite: false,
-              };
-            });
-            console.log("from vehicles ", data);
-            setStore({ vehicles: dataGathered });
-            setStore({ next: data.next });
-            setStore({ previous: data.previous });
-          });
-        // const store = getStore();
-        // fetch("https://www.swapi.tech/api/vehicles/", {
-        // 	method: "GET",
-        // 	headers: { "Content-Type": "application/json" },
-        // })
-        // 	.then((resp) => {
-        // 		return resp.json();
-        // 	})
-        // 	.then(data => {
-        // 		let dataGathered = data.results.map((item,index) => {
-        // 			return {...item,index:index,type:"vehicles",favorite:false};
-        // 		});
-
-        // 		setStore({vehicles : dataGathered});
-        // 	})
-      },
-
-      getSingleVehicle: (uid) => {
-        const store = getStore();
-        fetch("https://www.swapi.tech/api/vehicles/" + uid, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            let dataGathered = data.result.properties;
-
-            setStore({ singleVehicle: dataGathered });
-          });
-      },
-
-      getPlanets: (varPag) => {
-        const store = getStore();
-        let fetchVar = "";
-
-        if (varPag == null) {
-          fetchVar = "https://www.swapi.tech/api/planets/";
-        } else {
-          fetchVar = varPag;
-        }
-
-        fetch(fetchVar, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            let dataGathered = data.results.map((item, index) => {
-              return {
-                ...item,
-                index: index,
-                type: "planets",
-                favorite: false,
-              };
-            });
-            console.log("from planets ", data);
-            setStore({ planets: dataGathered });
-            setStore({ next: data.next });
-            setStore({ previous: data.previous });
-          });
-
-        // const store = getStore();
-        // fetch("https://www.swapi.tech/api/planets/", {
-        // 	method: "GET",
-        // 	headers: { "Content-Type": "application/json" },
-        // })
-        // 	.then((resp) => {
-        // 		return resp.json();
-        // 	})
-        // 	.then(data => {
-        // 		let dataGathered = data.results.map((item,index) => {
-        // 			return {...item,index:index,type:"planets",favorite:false};
-        // 		});
-
-        // 		setStore({planets : dataGathered});
-        // 	})
-      },
-
-      getSinglePlanet: (uid) => {
-        const store = getStore();
-        fetch("https://www.swapi.tech/api/planets/" + uid, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            let dataGathered = data.result.properties;
-
-            setStore({ singlePlanet: dataGathered });
-          });
-      },
-
-      addToFavorites: (uid, url, name, type, index) => {
-        const store = getStore();
-
-        if (type == "people") {
-          store.people[index].favorite = true;
-        }
-        if (type == "vehicles") {
-          store.vehicles[index].favorite = true;
-        }
-        if (type == "planets") {
-          store.planets[index].favorite = true;
-        }
-        let temp = store.favorites;
-
-        temp.push({
-          index: index,
-          uid: uid,
-          url: url,
-          name: name,
-          type: type,
-          favorite: true,
-        });
-
-        const names = temp.map((o) => o.name);
-        const filtered = temp.filter(
-          ({ name }, index) => !names.includes(name, index + 1)
-        );
-
-        setStore({ favorites: filtered });
-      },
-
-      removeFromFavorites: (i) => {
-        const store = getStore();
-
-        if (i.type == "people") {
-          store.people[i.index].favorite = false;
-        }
-        if (i.type == "vehicles") {
-          store.vehicles[i.index].favorite = false;
-        }
-        if (i.type == "planets") {
-          store.planets[i.index].favorite = false;
-        }
-
-        let temp = store.favorites;
-
-        let testeVar = temp.filter((objecto) => {
-          return objecto !== i;
-        });
-
-        setStore({ favorites: testeVar });
-      },
 
 //------------------------------------------------------------------------------------------------
 //											 GET USERS
@@ -617,7 +378,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getCharacters: async () => {
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/home-internal/characters"
+            process.env.BACKEND_URL + "/api/characters"
           );
 
           const data = await response.json();
@@ -637,7 +398,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let store = getStore();
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/home-internal/characters/" + id
+            process.env.BACKEND_URL + "/api/characters/" + id
           );
 
           const data = await response.json();
@@ -658,10 +419,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 //											 GET PLANETS
 //--------------------------------------------------------------------------------------------------------------
 
-      getPlanetsInt: async () => {
+      getPlanets: async () => {
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/home-internal/planets"
+            process.env.BACKEND_URL + "/api/planets"
           );
           const data = await response.json();
 
@@ -681,7 +442,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let store = getStore();
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/home-internal/planets/" + id
+            process.env.BACKEND_URL + "/api/planets/" + id
           );
 
           const data = await response.json();
@@ -702,10 +463,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 //											 GET VEHICLES
 //--------------------------------------------------------------------------------------------------------------
 
-      getVehiclesInt: async () => {
+      getVehicles: async () => {
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/home-internal/vehicles"
+            process.env.BACKEND_URL + "/api/vehicles"
           );
           const data = await response.json();
 
@@ -725,7 +486,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let store = getStore();
         try {
           const response = await fetch(
-            process.env.BACKEND_URL + "/api/home-internal/vehicles/" + id
+            process.env.BACKEND_URL + "/api/vehicles/" + id
           );
 
           const data = await response.json();
@@ -741,6 +502,234 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(err);
         }
       },
+
+//-------------------------------------------------------------------------------
+//											 GET USERS ADMIN
+//-------------------------------------------------------------------------------
+
+      getUsers: async () => {
+        try {
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/user",
+
+            ); // search
+          const data = await response.json();
+          // set store with the bringed data
+          setStore({
+            user: data,
+          }); //promise
+        } catch (err) {
+          // standar error log
+          console.log(err);
+        }
+        // details fetch
+      }, 
+
+
+      addFavorites: (itemName, itemUid, type, user_id) => {
+
+				const {favorites} = getStore();
+				
+				function removeObjectWithId(arr, nam){
+					const filterFav = arr.filter((obj) => obj.name !== nam)
+						return setStore({favorites: filterFav})
+					}  
+				const mapFav = favorites.map(item=>item.name)
+				
+				if (!mapFav.find(i => i == itemName )){
+					favorites.push({name: itemName, id: itemUid, type: type })
+					{type=="character" && getActions().postFavouriteChar(user_id, itemUid)};
+					{type=="planet" && getActions().postFavouritePlanet(user_id, itemUid)};
+					{type=="vehicle" && getActions().postFavouriteVehicle(user_id, itemUid)};
+					
+					console.log("not on the list, added")
+				}
+				else{
+					console.log("on the list, removed")
+					{type=="character" && getActions().deleteFavouriteChar(user_id, itemUid)};
+					{type=="planet" && getActions().deleteFavouritePlanet(user_id, itemUid)};
+					{type=="vehicle" && getActions().deleteFavouriteVehicle(user_id, itemUid)};
+					return removeObjectWithId(favorites, itemName)
+				}
+				
+				console.log(favorites, "final favorites")
+				setStore({favorites: favorites})
+				// getActions().changeColor(0, "green");
+
+			}, 
+
+			deleteFavorites: (itemIndex, itemUid, user_id, type) => {
+				const {favorites} = getStore();
+				const newFav = [...favorites]
+				newFav.splice(itemIndex,1)
+				{type=="character" && getActions().deleteFavouriteChar(user_id, itemUid)};
+				{type=="planet" && getActions().deleteFavouritePlanet(user_id, itemUid)};
+				{type=="vehicle" && getActions().deleteFavouriteVehicle(user_id, itemUid)};
+				setStore({favorites: newFav})
+			},
+			getFavourites:(user_id)=>{
+				const opts = {
+					method: "POST",
+					headers: {
+					  "Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						user_id: user_id
+					  }),
+				  };
+				  fetch(process.env.BACKEND_URL + "/api/get_all_fav", opts)
+					.then((resp) => {
+					  if (resp.status === 200) return resp.json();
+					})
+					.then((data) => {
+					   console.log(data, "fetch all favorites")
+					   setStore({favorites: data})
+					   
+					})
+					.catch((error) => {
+					  console.error("There was an error fetching people", error);			
+					});
+
+			},
+
+			postFavouriteChar:(user_id, char_id) => {
+				const opts = {
+				  method: "POST",
+				  headers: {
+					"Content-type": "application/json"
+				  },
+				  body: JSON.stringify({
+					user_id: user_id,
+					char_id: char_id,
+				  }),
+				};
+				fetch(process.env.BACKEND_URL + "/api/add_fav_char", opts)
+				  .then((resp) => {
+					if (resp.status === 200) return resp.json();
+				  })
+				  .then((data) => {
+					console.log(data)
+				  })
+				  .catch((error) => {
+					console.error("There was an error", error);					
+				  });
+			  },
+			  postFavouritePlanet:(user_id, planet_id) => {
+				const opts = {
+				  method: "POST",
+				  headers: {
+					"Content-type": "application/json"
+				  },
+				  body: JSON.stringify({
+					user_id: user_id,
+					planet_id: planet_id,
+				  }),
+				};
+				fetch(process.env.BACKEND_URL + "/api/add_fav_planet", opts)
+				  .then((resp) => {
+					if (resp.status === 200) return resp.json();
+				  })
+				  .then((data) => {
+					console.log(data)
+				  })
+				  .catch((error) => {
+					console.error("There was an error", error);					
+				  });
+			  },
+			  postFavouriteVehicle:(user_id, veh_id) => {
+				const opts = {
+				  method: "POST",
+				  headers: {
+					"Content-type": "application/json"
+				  },
+				  body: JSON.stringify({
+					user_id: user_id,
+					veh_id: veh_id
+				  }),
+				};
+				fetch(process.env.BACKEND_URL + "/api/add_fav_veh", opts)
+				  .then((resp) => {
+					if (resp.status === 200) return resp.json();
+				  })
+				  .then((data) => {
+					console.log(data)
+				  })
+				  .catch((error) => {
+					console.error("There was an error", error);					
+				  });
+			  },
+			deleteFavouriteChar:(user_id,char_id)=>{
+				const opts = {
+					method: "DELETE",
+					headers: {
+					  "Content-type": "application/json"
+					},
+					body: JSON.stringify({	
+					  user_id: user_id,				
+					  char_id: char_id
+					}),
+				  };
+				  fetch(process.env.BACKEND_URL + `/api/favorite/char/delete`, opts)
+					.then((resp) => {
+					  if (resp.status === 200) return resp.json();
+					})
+					.then((data) => {
+					  console.log(data)
+					})
+					.catch((error) => {
+					  console.error("There was an error", error);					
+					});
+
+			},
+
+			deleteFavouritePlanet:(user_id,planet_id)=>{
+				const opts = {
+					method: "DELETE",
+					headers: {
+					  "Content-type": "application/json"
+					},
+					body: JSON.stringify({	
+					  user_id: user_id,				
+					  planet_id: planet_id
+					}),
+				  };
+				  fetch(process.env.BACKEND_URL + `/api/favorite/planet/delete`, opts)
+					.then((resp) => {
+					  if (resp.status === 200) return resp.json();
+					})
+					.then((data) => {
+					  console.log(data)
+					})
+					.catch((error) => {
+					  console.error("There was an error", error);					
+					});
+
+			},
+			deleteFavouriteVehicle:(user_id,veh_id)=>{
+				const opts = {
+					method: "DELETE",
+					headers: {
+					  "Content-type": "application/json"
+					},
+					body: JSON.stringify({	
+					  user_id: user_id,				
+					  veh_id: veh_id
+					}),
+				  };
+				  fetch(process.env.BACKEND_URL + `/api/favorite/vehicle/delete`, opts)
+					.then((resp) => {
+					  if (resp.status === 200) return resp.json();
+					})
+					.then((data) => {
+					  console.log(data)
+					})
+					.catch((error) => {
+					  console.error("There was an error", error);					
+					});
+
+			},
+
+
 
 		}
 	};

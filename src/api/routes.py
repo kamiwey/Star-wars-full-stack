@@ -236,7 +236,7 @@ def all_users():
     return response
 
 
-@api.route('/home-internal/characters', methods=['GET'])
+@api.route('/characters', methods=['GET'])
 def all_characters():
 
     char = Character.query.all()
@@ -245,7 +245,7 @@ def all_characters():
     
     return response
 
-@api.route('/home-internal/planets', methods=['GET'])
+@api.route('/planets', methods=['GET'])
 def all_planets():
 
     plan = Planet.query.all()
@@ -254,7 +254,7 @@ def all_planets():
     
     return response
 
-@api.route('/home-internal/vehicles', methods=['GET'])
+@api.route('/vehicles', methods=['GET'])
 def all_vehicles():
 
     veh = Vehicle.query.all()
@@ -263,25 +263,25 @@ def all_vehicles():
     
     return response
 
-@api.route('/home-internal/characters/<int:position>', methods=['GET'])
+@api.route('/characters/<int:position>', methods=['GET'])
 def specific_char(position):
 
     char = Character.query.filter_by(id=position).first()
     return jsonify(char.serialize())
 
-@api.route('/home-internal/planets/<int:position>', methods=['GET'])
+@api.route('/planets/<int:position>', methods=['GET'])
 def specific_planet(position):
 
     plan = Planet.query.filter_by(id=position).first()
     return jsonify(plan.serialize())
 
-@api.route('/home-internal/vehicles/<int:position>', methods=['GET'])
+@api.route('/vehicles/<int:position>', methods=['GET'])
 def specific_veh(position):
 
     veh = Vehicle.query.filter_by(id=position).first()
     return jsonify(veh.serialize())
 
-@api.route('/home-internal/add_fav_char', methods=['POST'])
+@api.route('/add_fav_char', methods=['POST'])
 def add_fav_char():
 
     request_body = request.json
@@ -294,7 +294,7 @@ def add_fav_char():
     
     return response
 
-@api.route('/home-internal/add_fav_planet', methods=['POST'])
+@api.route('/add_fav_planet', methods=['POST'])
 def add_fav_planet():
 
     request_body = request.json
@@ -307,7 +307,7 @@ def add_fav_planet():
     
     return response
 
-@api.route('/home-internal/add_fav_veh', methods=['POST'])
+@api.route('/add_fav_veh', methods=['POST'])
 def add_fav_veh():
 
     request_body = request.json
@@ -320,59 +320,77 @@ def add_fav_veh():
     
     return response
 
-@api.route('/home-internal/get_all_fav', methods=['GET'])
+@api.route('/get_all_fav', methods=['POST'])
 def get_all_fav():
 
     user = request.json.get("user_id", None)
     fav_veh = Fav_veh.query.filter_by(user_id=user).all()
     fav_list_veh =  list(map(lambda x: x.serialize(), fav_veh))
     find_veh = [Vehicle.query.filter_by(id=x["veh_id"]).first().serialize() for x in fav_list_veh]
-    
+    find_veh = list(map(lambda x: {**x, "type" : "vehicle"}, find_veh))
+   
     fav_char = Fav_char.query.filter_by(user_id=user).all()
     fav_list_char =  list(map(lambda x: x.serialize(), fav_char))
     find_char = [Character.query.filter_by(id=x["char_id"]).first().serialize() for x in fav_list_char]
+    find_char = list(map(lambda x: {**x, "type" : "character"}, find_char))
 
     fav_planet = Fav_planet.query.filter_by(user_id=user).all()
     fav_list_planet =  list(map(lambda x: x.serialize(), fav_planet))
     find_planet = [Planet.query.filter_by(id=x["planet_id"]).first().serialize() for x in fav_list_planet]
+    find_planet = list(map(lambda x: {**x, "type" : "planet"}, find_planet))
 
     print(find_char)
     print(find_veh)
     print(find_planet)
-    return find_veh + find_char + find_planet
+    return find_veh + find_char + find_planet, 200
 
-@api.route('/home-internal/favorite/planet-delete/<int:planet_id>', methods=['DELETE'])
+@api.route('/favorite/planet/delete', methods=['DELETE'])
 #@jwt_required()
-def delete_planet(planet_id):
-
+def delete_planet():
+    user = request.json.get("user_id", None)
+    planet_id = request.json.get("planet_id", None)
+    fav_planet_all = Fav_planet.query.filter_by(user_id=user, planet_id=planet_id).first()
+   
     if planet_id == None:
-        return "Can't find planet to delete", 404
-    planet= Fav_planet.query.filter_by(id=planet_id).first()
-    db.session.delete(planet)
+        return "Can't find character to delete", 404
+    if fav_planet_all == None:
+        return "no favorite planet to delete"
+    
+    db.session.delete(fav_planet_all)
     db.session.commit()
     
-    return jsonify({"planet": planet.serialize(),"message": "this planet was deleted"}), 200
+    return jsonify({"planet":fav_planet_all.serialize(), "message":"was deleted"}), 200
 
-@api.route('/home-internal/favorite/char-delete/<int:char_id>', methods=['DELETE'])
+@api.route('/favorite/char/delete', methods=['DELETE'])
 #@jwt_required()
-def delete_char(char_id):
-
+def delete_char():
+    user = request.json.get("user_id", None)
+    char_id = request.json.get("char_id", None)
+    fav_char_all = Fav_char.query.filter_by(user_id=user, char_id=char_id).first()
+   
     if char_id == None:
         return "Can't find character to delete", 404
-    char= Fav_char.query.filter_by(id=char_id).first()
-    db.session.delete(char)
+    if fav_char_all == None:
+        return "no favorite character to delete"
+    
+    db.session.delete(fav_char_all)
     db.session.commit()
     
-    return jsonify({"character": char.serialize(),"message": "this character was deleted"}), 200
+    return jsonify({"character":fav_char_all.serialize(), "message":"was deleted"}), 200
 
-@api.route('/home-internal/favorite/veh-delete/<int:veh_id>', methods=['DELETE'])
+@api.route('/favorite/vehicle/delete', methods=['DELETE'])
 #@jwt_required()
-def delete_veh(veh_id):
-
+def delete_vehicle():
+    user = request.json.get("user_id", None)
+    veh_id = request.json.get("veh_id", None)
+    fav_veh_all = Fav_veh.query.filter_by(user_id=user, veh_id=veh_id).first()
+   
     if veh_id == None:
-        return "Can't find vehicle to delete", 404
-    veh= Fav_veh.query.filter_by(id=veh_id).first()
-    db.session.delete(veh)
+        return "Can't find character to delete", 404
+    if fav_veh_all == None:
+        return "no favorite vehicle to delete"
+    
+    db.session.delete(fav_veh_all)
     db.session.commit()
     
-    return jsonify({"vehicle": veh.serialize(),"message": "this vehicle was deleted"}), 200
+    return jsonify({"vehicle":fav_veh_all.serialize(), "message":"was deleted"}), 200

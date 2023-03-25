@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Context } from '../../store/appContext';
-import NavbarInt from '../../component/NavbarInt';
 
-const VehiclesDetailsInt = () => {
+const VehiclesDetails = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
@@ -13,7 +12,7 @@ const VehiclesDetailsInt = () => {
 
   return (
     <div>
-		<NavbarInt />
+		
     <div className="jumbotron ">
 
 			<div className="card" style={{ maxWidth: "60%", margin: "auto", background: "#282727"}}>
@@ -48,4 +47,4 @@ const VehiclesDetailsInt = () => {
   )
 }
 
-export default VehiclesDetailsInt;
+export default VehiclesDetails;

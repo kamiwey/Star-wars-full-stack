@@ -9,26 +9,25 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import Characters from "./pages/External-API/Characters";
-import CharactersInt from "./pages/Internal/CharactersInt";
+import NavbarInt from "./component/NavbarInt";
+
+import Characters from "./pages/Internal/Characters";
+import CharDetails from "./pages/Internal/CharDetails";
+import Planets from "./pages/Internal/Planets";
+import PlanetsDetails from "./pages/Internal/PlanetsDetails";
+import Vehicles from "./pages/Internal/Vehicles";
+import VehiclesDetails from "./pages/Internal/VehiclesDetails";
+
+import Profile from "./pages/Profile/Profile";
+
 import SignUp from "./pages/LoginPages/Signup";
 import Login from "./pages/LoginPages/Login";
-import HomeExternal from "./pages/External-API/HomeExternal";
-import HomeInternal from "./pages/Internal/HomeInternal";
-import CharDetails from "./pages/External-API/CharDetails";
-import CharDetailsInt from "./pages/Internal/CharDetailsInt";
-import Planets from "./pages/External-API/Planets";
-import PlanetsInt from "./pages/Internal/PlanetsInt";
-import PlanetsDetails from "./pages/External-API/PlanetsDetails";
-import PlanetsDetailsInt from "./pages/Internal/PlanetsDetailsInt";
-import Vehicles from "./pages/External-API/Vehicles";
-import VehiclesInt from "./pages/Internal/VehiclesInt";
-import VehiclesDetails from "./pages/External-API/VehiclesDetails";
-import VehiclesDetailsInt from "./pages/Internal/VehiclesDetailsInt";
-import Testing from "./pages/External-API/Testing";
-import Profile from "./pages/Profile/Profile";
-import Admin from "./pages/Admin/Admin";
 
+import Admin from "./pages/Admin/Admin";
+import AdminUsers from "./pages/Admin/AdminUsers";
+import AdminCharacters from "./pages/Admin/AdminCharacters";
+import AdminPlanets from "./pages/Admin/AdminPlanets";
+import AdminVehicles from "./pages/Admin/AdminVehicles";
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -39,33 +38,27 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    
+                    <NavbarInt />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<HomeExternal />} path="/home-external" />
-                        <Route element={<HomeInternal />} path="/home-internal" />
-
-                        <Route element={<Characters />} path="/characters" />
-                        <Route element={<CharactersInt />} path="/charactersint" />
-                        <Route element={<CharDetails />} path="/characters/:id" />
-                        <Route element={<CharDetailsInt />} path="/charactersint/:id" />
-
-                        <Route element={<Planets />} path="/planets" />
-                        <Route element={<PlanetsInt />} path="/planetsint" />
+                        
+                        
+                        <Route element={<Characters />} path="/characters" />                        
+                        <Route element={<CharDetails />} path="/characters/:id" />                                                
+                        <Route element={<Planets />} path="/planets" />                        
                         <Route element={<PlanetsDetails />} path="/planets/:id" />
-                        <Route element={<PlanetsDetailsInt />} path="/planetsint/:id" />
-
-                        <Route element={<Vehicles />} path="/vehicles" />
-                        <Route element={<VehiclesInt />} path="/vehiclesint" />
+                        <Route element={<Vehicles />} path="/vehicles" />                        
                         <Route element={<VehiclesDetails />} path="/vehicles/:id" />
-                        <Route element={<VehiclesDetailsInt />} path="/vehiclesint/:id" />
 
                         <Route element={<SignUp />} path="/signup" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<Profile />} path="/profile" />
-                        <Route element={<Testing />} path="/testing" />
+                        <Route element={<Profile />} path="/profile" />                        
 
                         <Route element={<Admin />} path="/Admin" />
+                        <Route element={<AdminUsers />} path="/AdminUsers" />
+                        <Route element={<AdminCharacters />} path="/AdminCharacters" />
+                        <Route element={<AdminPlanets />} path="/AdminPlanets" />
+                        <Route element={<AdminVehicles />} path="/AdminVehicles" />
 
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
